@@ -1,0 +1,48 @@
+/* ════════════════════════════
+   Expenses — God-Tier
+   ════════════════════════════ */
+.page { display:flex;flex-direction:column;gap:var(--s5);animation:fadeInUp 0.5s ease both; }
+
+.summaryGrid { display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s4); }
+
+.summaryCard {
+  padding:var(--s5) var(--s5);display:flex;align-items:center;gap:var(--s4);
+  position:relative;overflow:hidden;
+  animation:cardEnter 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.4s ease;
+  transform:perspective(1000px) translateZ(0);
+}
+.summaryCard:nth-child(1){animation-delay:0s}
+.summaryCard:nth-child(2){animation-delay:0.08s}
+.summaryCard:nth-child(3){animation-delay:0.16s}
+.summaryCard:nth-child(4){animation-delay:0.24s}
+
+.summaryCard::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--accent-grad);opacity:0;transition:opacity 0.3s ease;
+}
+.summaryCard:hover {
+  transform:perspective(1000px) rotateX(-3deg) translateY(-7px) translateZ(10px);
+  box-shadow:var(--shadow-3d-hover);
+}
+.summaryCard:hover::before { opacity:1; }
+
+.summaryIcon {
+  width:52px;height:52px;border-radius:var(--r-xl);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.06);
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.summaryCard:hover .summaryIcon { transform:scale(1.15) rotate(-8deg); }
+
+.summaryLabel { font-size:0.75rem;font-weight:700;color:var(--text-muted);margin:0 0 4px 0;text-transform:uppercase;letter-spacing:0.06em; }
+.summaryValue { font-size:1.75rem;font-weight:900;margin:0;letter-spacing:-0.03em;color:var(--text-primary); }
+.summaryFull { font-size:0.72rem;color:var(--text-muted);margin:4px 0 0 0; }
+
+.chartCard { padding:var(--s6);animation:fadeInUp 0.5s ease 0.2s both;transition:transform 0.3s ease; }
+.chartCard:hover { transform:perspective(1000px) translateY(-4px); }
+.chartTitle { margin:0 0 var(--s5) 0;font-size:1rem;font-weight:700;color:var(--text-primary); }
+.chartBody { height:270px; }
+
+@media (max-width:1200px){.summaryGrid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:600px){.summaryGrid{grid-template-columns:1fr;}}

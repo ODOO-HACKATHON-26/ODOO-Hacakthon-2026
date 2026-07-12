@@ -1,3 +1,5 @@
+import StatusBadge from "../common/StatusBadge";
+
 export default function TripTable() {
   const trips = [
     {
@@ -57,7 +59,9 @@ export default function TripTable() {
               <td>{trip.vehicle}</td>
               <td>{trip.driver}</td>
               <td>{trip.route}</td>
-              <td>{trip.status}</td>
+              <td>
+  <StatusBadge status={trip.status} />
+             </td>
               <td>{trip.departure}</td>
             </tr>
           ))}
