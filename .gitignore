@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -134,3 +135,64 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+=======
+# --- Environment / secrets ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# --- Alembic ---
+*.sqlite3
+
+# --- Node / Frontend ---
+node_modules/
+dist/
+build/
+.vite/
+.next/
+.turbo/
+
+# --- Logs ---
+*.log
+logs/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+
+# --- Docker ---
+*.override.yml
+
+# --- Uploaded / generated files ---
+uploads/
+media/
+exports/
+*.csv
+*.pdf
+!sample_data/*.csv
+>>>>>>> 946ad84 (chore(init): Initilize the backend architecture)
