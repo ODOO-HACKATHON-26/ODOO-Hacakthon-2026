@@ -2,9 +2,9 @@
 
 ## Team
 
-- Shrestha (Team Leader)
-- Nikhil 
-- Mukundh
+- Shrestha (Team Leader + Product & Integration Lead)
+- Nikhil (Backend)
+- Mukundh (Frontend)
 
 ---
 
