@@ -1,3 +1,9 @@
+import Layout from "../components/Layout";
+
 export default function Drivers() {
-  return <h1>Drivers</h1>;
+  return (
+    <Layout>
+      <h1>Drivers</h1>
+    </Layout>
+  );
 }
