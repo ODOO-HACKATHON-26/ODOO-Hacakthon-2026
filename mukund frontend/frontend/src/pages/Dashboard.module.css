@@ -1,0 +1,228 @@
+/* ════════════════════════════════════════
+   Dashboard — God-Tier 3D + Animations
+   ════════════════════════════════════════ */
+
+.dashboard {
+  display:flex;flex-direction:column;gap:var(--s5);
+  animation:fadeInUp 0.5s ease both;
+  position:relative;
+  min-height:100%;
+}
+
+/* ═══ Ambient Background Orbs ═══════ */
+.bgOrb1, .bgOrb2, .bgOrb3 {
+  position:fixed;border-radius:50%;
+  filter:blur(80px);pointer-events:none;z-index:0;
+  opacity:0; /* start hidden, shown via theme */
+}
+
+[data-theme="dark"] .bgOrb1 {
+  width:400px;height:400px;
+  top:-100px;right:-50px;
+  background:radial-gradient(circle,rgba(14,165,233,0.12) 0%,transparent 70%);
+  opacity:1;animation:orbFloat1 18s ease-in-out infinite;
+}
+[data-theme="dark"] .bgOrb2 {
+  width:350px;height:350px;
+  bottom:100px;left:-80px;
+  background:radial-gradient(circle,rgba(139,92,246,0.1) 0%,transparent 70%);
+  opacity:1;animation:orbFloat2 22s ease-in-out infinite;
+}
+[data-theme="dark"] .bgOrb3 {
+  width:250px;height:250px;
+  top:40%;right:20%;
+  background:radial-gradient(circle,rgba(16,185,129,0.06) 0%,transparent 70%);
+  opacity:1;animation:orbFloat3 15s ease-in-out infinite;
+}
+
+[data-theme="light"] .bgOrb1 {
+  width:500px;height:500px;
+  top:-150px;right:-100px;
+  background:radial-gradient(circle,rgba(2,132,199,0.06) 0%,transparent 70%);
+  opacity:1;animation:orbFloat1 20s ease-in-out infinite;
+}
+[data-theme="light"] .bgOrb2 {
+  width:400px;height:400px;
+  bottom:50px;left:-100px;
+  background:radial-gradient(circle,rgba(124,58,237,0.05) 0%,transparent 70%);
+  opacity:1;animation:orbFloat2 25s ease-in-out infinite;
+}
+
+/* ═══ KPI Grid ════════════════════════ */
+.kpiGrid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--s4);
+  position:relative;z-index:1;
+}
+
+.kpiCard {
+  padding:var(--s5) var(--s5);
+  display:flex;flex-direction:column;gap:var(--s4);
+  cursor:default;position:relative;overflow:hidden;
+  /* Staggered entrance */
+  animation:cardEnter 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.4s ease;
+  transform:perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0);
+  will-change:transform,box-shadow;
+}
+
+/* 3D hover lift */
+.kpiCard:hover {
+  transform:perspective(1000px) rotateX(-3deg) translateY(-8px) translateZ(12px);
+  box-shadow:var(--shadow-3d-hover);
+}
+
+/* Top gradient accent line */
+.kpiCard::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(14,165,233,0.3),transparent);
+  opacity:0;transition:opacity 0.3s ease;
+}
+.kpiCard:hover::before { opacity:1; }
+
+/* Bottom accent bar */
+.kpiAccentLine {
+  position:absolute;bottom:0;left:0;height:2px;width:60%;
+  border-radius:0 var(--r-full) 0 0;
+  opacity:0;transition:opacity 0.3s ease;
+}
+.kpiCard:hover .kpiAccentLine { opacity:1; }
+
+/* Shimmer on hover */
+.kpiCard::after {
+  content:'';position:absolute;top:0;left:-100%;
+  width:50%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.025),transparent);
+  pointer-events:none;transition:left 0.7s ease;
+}
+.kpiCard:hover::after { left:130%; }
+
+.kpiTop { display:flex;justify-content:space-between;align-items:flex-start; }
+.kpiTitle {
+  font-size:0.75rem;font-weight:700;color:var(--text-muted);
+  margin:0 0 var(--s2) 0;text-transform:uppercase;letter-spacing:0.07em;
+}
+.kpiValue {
+  font-size:2rem;font-weight:900;margin:0;
+  letter-spacing:-0.04em;line-height:1;color:var(--text-primary);
+  font-variant-numeric:tabular-nums;
+}
+
+.kpiIcon {
+  width:48px;height:48px;border-radius:var(--r-xl);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  position:relative;
+}
+.kpiCard:hover .kpiIcon { transform:scale(1.15) rotate(-5deg); }
+
+.kpiBottom { display:flex;justify-content:space-between;align-items:center; }
+.kpiSubtitle { font-size:0.74rem;color:var(--text-muted); }
+
+.kpiTrend {
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:0.72rem;font-weight:700;padding:2px 8px;
+  border-radius:var(--r-full);
+  box-shadow:0 1px 4px rgba(0,0,0,0.1),inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.trendUp { color:var(--success);background:var(--success-bg); }
+.trendDown { color:var(--danger);background:var(--danger-bg); }
+
+/* ═══ Charts Grid ═════════════════════ */
+.chartsGrid {
+  display:grid;
+  grid-template-columns:1.65fr 1fr;
+  gap:var(--s4);
+  position:relative;z-index:1;
+}
+
+.chartCard {
+  padding:var(--s6);display:flex;flex-direction:column;
+  transition:transform 0.35s ease,box-shadow 0.35s ease;
+  animation:fadeInUp 0.6s ease both;
+  animation-delay:0.2s;
+}
+.chartCard:hover {
+  transform:perspective(1000px) rotateX(-1.5deg) translateY(-4px);
+  box-shadow:var(--shadow-3d-hover);
+}
+
+.chartHeader { display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s5); }
+.chartTitle { margin:0;font-size:1rem;font-weight:700;letter-spacing:-0.01em;color:var(--text-primary); }
+
+.chartBadge {
+  font-size:0.68rem;font-weight:700;
+  padding:0.25rem 0.625rem;border-radius:var(--r-full);
+  background:var(--accent-subtle);color:var(--accent-light);
+  letter-spacing:0.04em;text-transform:uppercase;
+  border:1px solid rgba(14,165,233,0.15);
+  box-shadow:0 0 12px rgba(14,165,233,0.1);
+}
+[data-theme="light"] .chartBadge {
+  background:rgba(2,132,199,0.08);color:var(--accent);
+  border-color:rgba(2,132,199,0.15);box-shadow:none;
+}
+
+.chartBody { flex:1;min-height:240px; }
+
+/* ─── Donut Legend ─── */
+.donutLegend {
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:var(--s2) var(--s4);margin-top:var(--s4);
+  padding-top:var(--s4);border-top:1px solid var(--border);
+}
+.legendItem { display:flex;align-items:center;gap:var(--s2);font-size:0.8rem; }
+.legendDot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
+.legendLabel { color:var(--text-secondary);flex:1; }
+.legendValue { font-weight:700;color:var(--text-primary); }
+
+/* ═══ Bottom Grid ═════════════════════ */
+.bottomGrid { display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);position:relative;z-index:1; }
+
+.recentCard {
+  padding:var(--s6);
+  animation:fadeInUp 0.6s ease both;animation-delay:0.3s;
+  transition:transform 0.3s ease;
+}
+.recentCard:hover { transform:perspective(1000px) translateY(-4px); }
+
+.viewAll {
+  display:inline-flex;align-items:center;gap:var(--s1);
+  font-size:0.8rem;font-weight:600;
+  color:var(--accent-light);text-decoration:none;
+  transition:all var(--t-fast);gap:4px;
+}
+.viewAll:hover { color:var(--accent);gap:8px; }
+
+/* ─── Trip Items ─── */
+.tripList { display:flex;flex-direction:column; }
+.tripItem {
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0.6875rem var(--s3);border-radius:var(--r-xl);
+  transition:all 0.2s ease;gap:var(--s4);
+  animation:rowEnter 0.4s ease both;
+  cursor:default;
+}
+.tripItem:hover {
+  background:var(--bg-hover);transform:translateX(4px);
+  box-shadow:inset 2px 0 0 var(--accent-light);
+}
+
+.tripRoute { display:flex;align-items:center;gap:var(--s2);min-width:180px; }
+.tripCity { font-size:0.875rem;font-weight:600;color:var(--text-primary); }
+.tripArrow { color:var(--text-muted);flex-shrink:0; }
+.tripMeta { display:flex;align-items:center;gap:var(--s4);flex:1; }
+.tripDetail { display:flex;align-items:center;gap:4px;font-size:0.74rem;color:var(--text-muted); }
+
+/* ─── Responsive ─── */
+@media (max-width:1280px) {
+  .kpiGrid { grid-template-columns:repeat(2,1fr); }
+  .chartsGrid { grid-template-columns:1fr; }
+  .bottomGrid { grid-template-columns:1fr; }
+}
+@media (max-width:640px) {
+  .kpiGrid { grid-template-columns:1fr; }
+  .tripMeta { display:none; }
+  .kpiValue { font-size:1.75rem; }
+}
