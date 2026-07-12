@@ -7,7 +7,7 @@ export default function DashboardStats() {
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
         gap: "20px",
-        marginTop: "30px",
+        marginTop: "24px",
       }}
     >
       <StatCard title="Total Vehicles" value="24" />
