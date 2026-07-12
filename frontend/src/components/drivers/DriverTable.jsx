@@ -1,3 +1,5 @@
+import StatusBadge from "../common/StatusBadge";
+
 export default function DriverTable() {
   const drivers = [
     {
@@ -52,7 +54,9 @@ export default function DriverTable() {
             <tr key={driver.id}>
               <td>{driver.name}</td>
               <td>{driver.vehicle}</td>
-              <td>{driver.status}</td>
+              <td>
+  <StatusBadge status={driver.status} />
+             </td>
               <td>{driver.phone}</td>
             </tr>
           ))}

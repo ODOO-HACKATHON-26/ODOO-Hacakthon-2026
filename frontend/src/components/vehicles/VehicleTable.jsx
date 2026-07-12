@@ -1,3 +1,5 @@
+import StatusBadge from "../common/StatusBadge";
+
 export default function VehicleTable() {
   const vehicles = [
     {
@@ -47,7 +49,9 @@ export default function VehicleTable() {
             <tr key={vehicle.id}>
               <td>{vehicle.vehicle}</td>
               <td>{vehicle.driver}</td>
-              <td>{vehicle.status}</td>
+              <td>
+  <StatusBadge status={vehicle.status} />
+             </td>
               <td>{vehicle.route}</td>
             </tr>
           ))}
