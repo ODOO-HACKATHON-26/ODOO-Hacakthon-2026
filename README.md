@@ -47,4 +47,4 @@ assets/
 
 ## Status
 
-🟡 Planning
+DEPLOYED
